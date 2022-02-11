@@ -4,19 +4,19 @@ $RNePCRUser = "yes" # yes/no
 
 $environment = @{
     servers = @{ 
-        Live = @(".")
+        Live = @('.')
         Target = @{ 
-            RNDB = "."
-            Svcs = "."
-            Nav = "."
-            ePCR = "."
+            RNDB = '.'
+            Svcs = '.'
+            Nav = '.'
+            ePCR = '.'
         }
     }
     filePaths = @{ 
-        currentCentralShare = "Q:\Old\CentralShare"
-        newCentralShare = "Q:\ZollData\CentralShare"
-        currentePCRConfigs = "C:\programdata\ZOLL Data Systems\Configurations"
-        backupLocation = "Q:\ZollData\Databases\Backup"
+        currentCentralShare = 'Q:\Old\CentralShare'
+        newCentralShare = 'Q:\ZollData\CentralShare'
+        currentePCRConfigs = 'C:\programdata\ZOLL Data Systems\Configurations'
+        backupLocation = 'Q:\ZollData\Databases\Backup'
     }
 }
 
@@ -29,8 +29,8 @@ $environment = @{
  }
 
  # Create ePCR config list or remove ePCR databases
- if ( $RNePCRUser = "no" ) {
-    $dbList.Remove("ePCR")
+ if ( $RNePCRUser = 'no' ) {
+    $dbList.Remove('ePCR')
  }
 
  # Begin migration
@@ -46,7 +46,6 @@ Start-Job -ScriptBlock { robocopy $args[0] $args[1] /mt /z /e /copyall } -Argume
         $targetGroup = $dbList.keys | Where-Object { $dbList[$_] -eq $db }
         Backup-SqlDatabase -ServerInstance $server -Database $db -CopyOnly -BackupFile $backupFile
         Write-Output "$db backup successfull, attempting to restore to target server as background job"
-        Restore-SqlDatabase -ServerInstance $environment['servers']['Target'][$targetGroup] -Database $db -BackupFile $backupFile
-        Write-Output $targetGroup
+        Restore-SqlDatabase -ReplaceDatabase -ServerInstance $environment['servers']['Target'][$targetGroup] -Database $db -BackupFile $backupFile
     }
  }
