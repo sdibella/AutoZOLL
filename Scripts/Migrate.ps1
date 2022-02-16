@@ -41,7 +41,6 @@ foreach ( $server in $environment['servers']['Live'] ) {
         Write-Output "$db backup successfull"
         Restore-SqlDatabase -RestoreAction Files -ReplaceDatabase -ServerInstance $environment['servers']['Target'][$targetGroup] -Database $db -BackupFile $backupFile
         Write-Output "$db restored succesfully"
-        # Start-Job -ScriptBlock { Restore-SqlDatabase -RestoreAction Files -ReplaceDatabase -ServerInstance $args[0] -Database $args[1] -BackupFile $args[2] } -ArgumentList $environment['servers']['Target'][$targetGroup], $db, $backupFile
     }
 }
 Get-Job | Wait-Job
