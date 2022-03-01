@@ -4,8 +4,8 @@ $environment = @{
     servers = @{ 
         Live = @('.')
         Target = @{ 
-            RNDB = ''
-            Svcs = ''
+            RNDB = '.'
+            Svcs = '.'
             Nav = '.'
             ePCR = '.'
         }
