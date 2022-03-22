@@ -39,7 +39,7 @@ foreach ( $server in $environment['servers']['Live'] ) {
         $targetGroup = $dbList.keys | Where-Object { $dbList[$_] -eq $db }
         Backup-SqlDatabase -CopyOnly -ServerInstance $server -Database $db -BackupFile $backupFile | Out-Null
         Write-Output "$db backup successfull"
-        Restore-SqlDatabase -RestoreAction Files -ReplaceDatabase -ServerInstance $environment['servers']['Target'][$targetGroup] -Database $db -BackupFile $backupFile
+        #Restore-SqlDatabase -RestoreAction Files -ReplaceDatabase -ServerInstance $environment['servers']['Target'][$targetGroup] -Database $db -BackupFile $backupFile
         Write-Output "$db restored succesfully"
     }
 }
