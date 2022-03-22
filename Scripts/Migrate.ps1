@@ -13,7 +13,7 @@ $environment = @{
     filePaths = @{ 
         currentCentralShare = 'Q:\Old\CentralShare'
         newCentralShare = 'Q:\ZollData\CentralShare'
-        currentePCRConfigs = 'C:\programdata\ZOLL Data Systems\Configurations'
+        #currentePCRConfigs = 'C:\programdata\ZOLL Data Systems\Configurations'
         backupLocation = 'Q:\ZollData\Databases\Backup'
     }
 }
